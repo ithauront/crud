@@ -143,7 +143,7 @@ com esse codigo vamos ter la onde fazemos a requizição um retorno de usuario a
 
 # add users
 vamos salvar os usuarios dentro da memoria de nossa aplicação.
-,no node o projeto fica executando até se parar o projeto com cntrl c então todo que a gente declarar vai ficando salvo na memoria do node.
+,no node o projeto fica executando até que se pare o projeto com cntrl c então todo que a gente declarar vai ficando salvo na memoria do node.
 isso é o ocnceito statefull 
 o statefull sempre vai ter agum tipo e informação sendo guardado em memoria, a aplicação depende das informação que sao salvas em memoria para continuar funcionando. caso ela perca seus dados e as informações em memoria ela pode não funcionar mais como estava
 uma aplicação stateless não salva nada em memoria então se a gente parar a aplicação e rodar ela de novo tudo vai se manter igual.
@@ -605,6 +605,7 @@ if (method === 'POST' && url === '/users') {
     caso de erro vamos adicionar um catch (que provavemente vai ser o erro por que o corpo veio vazio/)
     vamos dar um req.body = null
     fica assim:
+    
     const server = http.createServer(async(req, res)=>{
     const {method, url} = req
 
