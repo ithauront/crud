@@ -680,6 +680,7 @@ nos podemos aproveitar esse middleware para transformar todas as respostas do no
 res
     .setHeader('Content-type', 'aplication/json')
     a função fica assim:
+
     export async function json(req, res) {
     const buffers = []
     for await (const chunk of req){
@@ -777,7 +778,7 @@ database.insert('users',users)
 
 no metodo get passamos o database.select('users') o select com o nome da tabela  e depois retornamos isso como resposta assim:
 if (method === 'GET' && url === '/users') {
-    database.select('users')
+   const users =  database.select('users')
     return res
     .end(JSON.stringify(users))
 }

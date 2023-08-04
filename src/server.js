@@ -15,6 +15,7 @@ const server = http.createServer(async(req, res) => {
 
     if(method == 'GET' && url == '/tasks') {
        const tasks = database.select('tasks')
+       
         return res.end(JSON.stringify(tasks))
     }
 
