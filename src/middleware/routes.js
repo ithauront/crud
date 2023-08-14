@@ -40,8 +40,24 @@ export const routes = [
         path: buildRoutePath('/tasks/:id'),
         handler: (req, res) => {
             const id = req.params.id
-            console.log("ID to delete:", id)
             database.delete('tasks', id)
+            return res.writeHead(204).end()
+        }
+    },
+    {
+        method: 'PUT',
+        path: buildRoutePath('/tasks/:id'),
+        handler: (req, res) => {
+            const id = req.params.id
+            const { title, description, completed_at }= req.body 
+            const updatedTask = {
+                title,
+                description,
+                completed_at,
+                updated_at: formatedDate,
+            }
+                               
+            database.update('tasks', id, updatedTask)
             return res.writeHead(204).end()
         }
     }
