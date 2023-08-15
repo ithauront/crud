@@ -1193,7 +1193,7 @@ const data = this.#database[table] ?? []
 
 return data
 }
-e dentro dele vamos vaer um if o search extiver preenchido. vamos fazer o data ser igual a data.filter() para filtrar ele como nos vamos alterar o valot de data é importante que a gente mude o const do data para uma let. no filter a gente vai definir row para percorrer todas as linhas.fica assim:
+e dentro dele vamos vaer um if o search extiver preenchido. vamos fazer o data ser igual a data.filter() para filtrar ele como nos vamos alterar o valor de data é importante que a gente mude o const do data para uma let. no filter a gente vai definir row para percorrer todas as linhas.fica assim:
 select(table, search) {
 let data = this.#database[table] ?? []
 
@@ -1237,7 +1237,7 @@ fica assim:
         })
     })
 }
-ai de dentro do some vamos retornar se de cara row na key inclui o valor. ou seja se no nome e emailtem algum valor fica assim:
+ai de dentro do some vamos retornar se de cada row na key inclui o valor. ou seja se no nome e email tem algum valor fica assim:
 if (search) {
     data = data.filter(row =>{
         return Object.entries(search).some(([key, value]) => {

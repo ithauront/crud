@@ -19,13 +19,15 @@ id
 title
 description
 completed_at - data de conclusção (valor inicial deve ser null) (provavelmente automatizar isso)
-created_at - data de criação (rovavelmente automatizar isso)
+created_at - data de criação (provavelmente automatizar isso)
 updated_at - atualizar essa data sempre que a task for alterada (provavelmente automatizar)
 
 # extras
 Validar se as propriedades title e description das rotas POST e PUT estão presentes no body da requisição.
 
 Nas rotas que recebem o /:id, além de validar se o id existe no banco de dados, retornar a requisição com uma mensagem informando que o registro não existe.
+
+colocar no search para pesuisar tambem as datas ?
 
 # importação csv
 para importar o csv vamos usar a lib CSV-parse com a lib instalada vamos criar um arquivo a parte para ler o csv
