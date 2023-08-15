@@ -42,18 +42,29 @@ export const routes = [
     },
     {
         method: 'DELETE',
-        path: buildRoutePath('/tasks/:id'),
+        path: buildRoutePath('/tasks/:id?'),
         handler: (req, res) => {
-            const id = req.params.id
-            database.delete('tasks', id)
-            return res.writeHead(204).end()
+            const id = req.params.id;
+            
+            if (!id) {
+                 res.writeHead(404, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
+            }
+        
+            database.delete('tasks', id);
+            return res.writeHead(204).end();
         }
     },
     {
         method: 'PUT',
-        path: buildRoutePath('/tasks/:id'),
+        path: buildRoutePath('/tasks/:id?'),
         handler: (req, res) => {
             const id = req.params.id
+            if (!id) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+               return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
+           }
+
             const { title, description, completed_at }= req.body 
             const updatedTask = {
                 title,
@@ -62,15 +73,19 @@ export const routes = [
                 updated_at: formatedDate,
             }
                                
-            database.put('tasks', id, updatedTask)
+            database.update('tasks', id, updatedTask)
             return res.writeHead(204).end()
         }
     },
     {
         method: 'PATCH',
-        path: buildRoutePath('/tasks/:id/complete'),
+        path: buildRoutePath('/tasks/:id/complete'), //ainda tenho que dar um jeito de fazer essa rota fucnionar caso não tenha id.
         handler: (req, res) => {
             const id = req.params.id
+            if (!id) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+               return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
+           }
             const completedTask = {
                 completed_at: formatedDate
             }
