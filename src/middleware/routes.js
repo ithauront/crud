@@ -28,6 +28,11 @@ export const routes = [
         path:buildRoutePath('/tasks'),
         handler: (req, res) =>{
             const {title, description} = req.body
+            if (!title || !description) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ error: 'title e/ou description não foram enviados no corpo da requisição.' }));
+          
+            }
             const tasks = {
                 id: randomUUID(),
                 title,
@@ -66,6 +71,11 @@ export const routes = [
            }
 
             const { title, description, completed_at }= req.body 
+            if (!title || !description || !completed_at) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ error: 'title, description e/ou created_at não foram enviados no corpo da requisição.' }));
+          
+            }
             const updatedTask = {
                 title,
                 description,

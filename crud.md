@@ -23,9 +23,14 @@ created_at - data de criação (provavelmente automatizar isso)
 updated_at - atualizar essa data sempre que a task for alterada (provavelmente automatizar)
 
 # extras
-Validar se as propriedades title e description das rotas POST e PUT estão presentes no body da requisição.
+Validar se as propriedades title e description das rotas POST e PUT estão presentes no body da requisição. V
+
+
+caso o id não seja passado na rota retornar a requsição dizendo que o id não foi enviado. V
 
 Nas rotas que recebem o /:id, além de validar se o id existe no banco de dados, retornar a requisição com uma mensagem informando que o registro não existe.
+
+revisar se os codigos de header que a gente esta usando são os mais adequados.
 
 colocar no search para pesuisar tambem as datas ?
 
