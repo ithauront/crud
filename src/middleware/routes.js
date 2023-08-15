@@ -79,7 +79,7 @@ export const routes = [
     },
     {
         method: 'PATCH',
-        path: buildRoutePath('/tasks/:id/complete'), //ainda tenho que dar um jeito de fazer essa rota fucnionar caso não tenha id.
+        path: buildRoutePath('/tasks/(:id/complete)?'), //ainda tenho que dar um jeito de fazer essa rota fucnionar caso não tenha id.
         handler: (req, res) => {
             const id = req.params.id
             if (!id) {
