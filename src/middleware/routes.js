@@ -17,6 +17,9 @@ export const routes = [
             const tasks = database.select('tasks', search ? {
                 title: search,
                 description: search,
+               created_at: search,
+               updated_at: search,
+               completed_at: search,
             }: null)
             
             return res.end(JSON.stringify(tasks))
