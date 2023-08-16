@@ -5,8 +5,11 @@ import { buildRoutePath } from "../utils/build-route-path.js"
 
 
 const database = new Database()
-const currentDate = new Date()
-const formatedDate = format(currentDate, 'dd-MM-yyyy')
+const getCurrentFormattedDate = () => {
+    const currentDate = new Date()
+    return format(currentDate, 'dd-MM-yyyy')
+}
+
 
 export const routes = [
     {
@@ -41,8 +44,8 @@ export const routes = [
                 title,
                 description,
                 completed_at: null,
-                created_at: formatedDate,
-                updated_at: formatedDate,
+                created_at: getCurrentFormattedDate(),
+                updated_at: getCurrentFormattedDate(),
             }
             database.insert('tasks', tasks)
             return res.writeHead(201).end()
@@ -58,10 +61,15 @@ export const routes = [
                  res.writeHead(400, { 'Content-Type': 'application/json' });
                 return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
             }
-        
+        try {
             database.delete('tasks', id);
             return res.writeHead(204).end();
+        } catch(error) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'ID não encontrado' }));
         }
+        }
+          
     },
     {
         method: 'PUT',
@@ -79,15 +87,21 @@ export const routes = [
                 return res.end(JSON.stringify({ error: 'title, description e/ou created_at não foram enviados no corpo da requisição.' }));
           
             }
-            const updatedTask = {
-                title,
-                description,
-                completed_at,
-                updated_at: formatedDate,
+            try {
+                const updatedTask = {
+                    title,
+                    description,
+                    completed_at,
+                    updated_at: getCurrentFormattedDate(),
+                }
+                                   
+                database.update('tasks', id, updatedTask)
+                return res.writeHead(204).end()
+            } catch(error) {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ error: 'ID não encontrado' }));
             }
-                               
-            database.update('tasks', id, updatedTask)
-            return res.writeHead(204).end()
+          
         }
     },
     {
@@ -99,11 +113,17 @@ export const routes = [
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
            }
+           try {
             const completedTask = {
-                completed_at: formatedDate
+                completed_at: getCurrentFormattedDate()
             }
             database.update('tasks', id, completedTask)
             return res.writeHead(204).end()
+           } catch(error) {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'ID não encontrado' }));
+           }
+           
         }
     }
 

@@ -28,7 +28,7 @@ Validar se as propriedades title e description das rotas POST e PUT estão prese
 
 caso o id não seja passado na rota retornar a requsição dizendo que o id não foi enviado. V
 
-Nas rotas que recebem o /:id, além de validar se o id existe no banco de dados, retornar a requisição com uma mensagem informando que o registro não existe.
+Nas rotas que recebem o /:id, além de validar se o id existe no banco de dados, retornar a requisição com uma mensagem informando que o registro não existe. V
 
 revisar se os codigos de header que a gente esta usando são os mais adequados. V
 

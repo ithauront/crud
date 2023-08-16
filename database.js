@@ -46,23 +46,25 @@ export class Database {
         
         const rowIndex = this.#database[table].findIndex(row => row.id === id)
        
-        if(rowIndex >-1) {
+        if(rowIndex === -1) {
+            throw new Error(`id não encontrado: ${id}`)
             
-            this.#database[table].splice(rowIndex, 1)
-            this.#persist()
         }
+        this.#database[table].splice(rowIndex, 1)
+            this.#persist()
     } 
 
     update(table, id, data) {
         const rowIndex = this.#database[table].findIndex(row => row.id === id)
        
 
-        if(rowIndex > -1) {
-            const originalTask = this.#database[table] [rowIndex]
-            const updatedTask = { ...originalTask, ...data}
-            this.#database[table] [rowIndex] = updatedTask
-            this.#persist()
+        if(rowIndex === -1) {
+            throw new Error(`id não encontrado: ${id}`)
         }
+        const originalTask = this.#database[table] [rowIndex]
+        const updatedTask = { ...originalTask, ...data}
+        this.#database[table] [rowIndex] = updatedTask
+        this.#persist()
     }
 
   
