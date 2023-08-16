@@ -30,9 +30,9 @@ caso o id não seja passado na rota retornar a requsição dizendo que o id não
 
 Nas rotas que recebem o /:id, além de validar se o id existe no banco de dados, retornar a requisição com uma mensagem informando que o registro não existe.
 
-revisar se os codigos de header que a gente esta usando são os mais adequados.
+revisar se os codigos de header que a gente esta usando são os mais adequados. V
 
-colocar no search para pesuisar tambem as datas ?
+colocar no search para pesuisar tambem as datas V
 
 # importação csv
 para importar o csv vamos usar a lib CSV-parse com a lib instalada vamos criar um arquivo a parte para ler o csv

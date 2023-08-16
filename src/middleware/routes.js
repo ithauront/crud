@@ -18,7 +18,7 @@ export const routes = [
                 title: search,
                 description: search,
             }: null)
-            console.log(req.query)
+            
             return res.end(JSON.stringify(tasks))
         }
         
@@ -52,7 +52,7 @@ export const routes = [
             const id = req.params.id;
             
             if (!id) {
-                 res.writeHead(404, { 'Content-Type': 'application/json' });
+                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
             }
         
@@ -72,7 +72,7 @@ export const routes = [
 
             const { title, description, completed_at }= req.body 
             if (!title || !description || !completed_at) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.writeHead(400, { 'Content-Type': 'application/json' });
                 return res.end(JSON.stringify({ error: 'title, description e/ou created_at não foram enviados no corpo da requisição.' }));
           
             }
@@ -93,7 +93,7 @@ export const routes = [
         handler: (req, res) => {
             const id = req.params.id
             if (!id) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.writeHead(400, { 'Content-Type': 'application/json' });
                return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
            }
             const completedTask = {
