@@ -5,7 +5,7 @@ import { buildRoutePath } from "../utils/build-route-path.js"
 
 
 const database = new Database()
-const getCurrentFormattedDate = () => {
+export const getCurrentFormattedDate = () => {
     const currentDate = new Date()
     return format(currentDate, 'dd-MM-yyyy')
 }
@@ -18,8 +18,8 @@ export const routes = [
         handler: (req, res) => {
             const {search} = req.query
             const tasks = database.select('tasks', search ? {
-                title: search,
-                description: search,
+               title: search,
+               description: search,
                created_at: search,
                updated_at: search,
                completed_at: search,
@@ -35,7 +35,7 @@ export const routes = [
         handler: (req, res) =>{
             const {title, description} = req.body
             if (!title || !description) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.writeHead(400, { 'Content-Type': 'application/json' });
                 return res.end(JSON.stringify({ error: 'title e/ou description não foram enviados no corpo da requisição.' }));
           
             }
@@ -77,7 +77,7 @@ export const routes = [
         handler: (req, res) => {
             const id = req.params.id
             if (!id) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.writeHead(400, { 'Content-Type': 'application/json' });
                return res.end(JSON.stringify({ error: 'ID da task não fornecido' }));
            }
 
@@ -106,7 +106,7 @@ export const routes = [
     },
     {
         method: 'PATCH',
-        path: buildRoutePath('/tasks/(:id/complete)?'), //ainda tenho que dar um jeito de fazer essa rota fucnionar caso não tenha id.
+        path: buildRoutePath('/tasks/(:id/complete)?'), 
         handler: (req, res) => {
             const id = req.params.id
             if (!id) {
