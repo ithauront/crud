@@ -14,7 +14,9 @@ export class Database {
     }
 
     #persist() {
-        fs.writeFile(databasePath, JSON.stringify(this.#database))
+        console.log('Persisting data:', this.#database); // Log para verificar os dados antes da persistência
+        fs.writeFile(databasePath, JSON.stringify(this.#database));
+        console.log('Data persisted.'); // Log após a persistência dos dados
     }
 
     select(table, search){
@@ -33,14 +35,25 @@ export class Database {
     }
 
     insert(table, data) {
-        if( Array.isArray(this.#database[table])) {
-            this.#database[table].push(data)
-        } else {
-            this.#database[table] = [data]
+        console.log(`Inserting data into ${table}:`, data);
+        
+        if (!this.#database[table]) {
+            this.#database[table] = [];
         }
-        this.#persist()
-        return data
+        
+        if (Array.isArray(this.#database[table])) {
+            this.#database[table].push(data);
+        } else {
+            this.#database[table] = [data];
+        }
+        
+        this.#persist();
+        
+        console.log(`Data inserted into ${table}.`);
+        
+        return data;
     }
+    
 
     delete(table, id) {
         
@@ -65,8 +78,6 @@ export class Database {
         const updatedTask = { ...originalTask, ...data}
         this.#database[table] [rowIndex] = updatedTask
         this.#persist()
-    }
-
-  
+    } 
  
 }
