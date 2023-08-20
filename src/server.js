@@ -2,7 +2,7 @@ import http from 'node:http'
 import { json } from './middleware/json.js'
 import { routes } from './middleware/routes.js'
 import {extractQueryParams} from './utils/extract-query-params.js'
-import { run } from './CSVParse/import-csv.js'
+import { importCvsFile } from './CSVParse/import-csv.js'
 
 
 
@@ -28,5 +28,5 @@ const server = http.createServer(async(req, res) => {
 
 })
 
-run()
+importCvsFile()
 server.listen(3333)

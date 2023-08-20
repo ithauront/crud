@@ -40,16 +40,17 @@ export class Database {
         if (!this.#database[table]) {
             this.#database[table] = [];
         }
-        
-        if (Array.isArray(this.#database[table])) {
+
+        const existingData = this.#database[table].some(entry => entry.title === data.title && entry.description === data.description)
+        if (!existingData) {
             this.#database[table].push(data);
+           
+            this.#persist();
+            
+            console.log(`Data inserted into ${table}.`);
         } else {
-            this.#database[table] = [data];
-        }
-        
-        this.#persist();
-        
-        console.log(`Data inserted into ${table}.`);
+            console.log('the task already exists in the database')
+        }   
         
         return data;
     }
